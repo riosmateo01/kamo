@@ -1,9 +1,6 @@
 import type {
   ClientPnL,
-  HarvestClient,
-  HarvestProject,
   HarvestTimeEntry,
-  MappingSnapshot,
   NeedsReviewItem,
   PeriodPnL,
   PnLReconciler,
@@ -12,6 +9,11 @@ import type {
   ReconciledPnL,
   DateRange,
 } from "@/lib/contracts/types";
+import {
+  buildClientPnlEvidence,
+  buildProjectPnlEvidence,
+} from "@/lib/metrics/pnl-evidence";
+import type { PnlEvidence } from "@/lib/metrics/types";
 
 function emptyPeriod(): PeriodPnL {
   return {
@@ -138,10 +140,19 @@ export const pnlReconciler: PnLReconciler = {
       addRevenue(prior, revenueLines, map.qboJobId, priorPeriod);
       const c = finalize(current);
       const p = finalize(prior);
+      const name = meta?.name ?? harvestProjectId;
       projectPnLs.push({
         harvestProjectId,
         qboJobId: map.qboJobId,
-        name: meta?.name ?? harvestProjectId,
+        name,
+        evidence: buildProjectPnlEvidence({
+          harvestProjectId,
+          qboJobId: map.qboJobId,
+          name,
+          period,
+          timeEntries,
+          revenueLines,
+        }),
         ...c,
         prior: {
           ...p,
@@ -171,10 +182,20 @@ export const pnlReconciler: PnLReconciler = {
       }
       const c = finalize(rolled);
       const p = finalize(rolledPrior);
+      const name = meta?.name ?? harvestClientId;
+      const childEvidence = childProjects
+        .map((hp) => projectPnLs.find((x) => x.harvestProjectId === hp.id)?.evidence)
+        .filter((e): e is PnlEvidence => Boolean(e));
       clientPnLs.push({
         harvestClientId,
         qboCustomerId: map.qboCustomerId,
-        name: meta?.name ?? harvestClientId,
+        name,
+        evidence: buildClientPnlEvidence({
+          id: harvestClientId,
+          name,
+          period,
+          projects: childEvidence,
+        }),
         ...c,
         prior: {
           ...p,

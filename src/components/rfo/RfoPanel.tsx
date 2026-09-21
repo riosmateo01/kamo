@@ -58,7 +58,8 @@ export function RfoPanel({ envStatus }: Props) {
   }, []);
 
   useEffect(() => {
-    void loadExceptions();
+    const timer = window.setTimeout(() => void loadExceptions(), 0);
+    return () => window.clearTimeout(timer);
   }, [loadExceptions]);
 
   async function runPlay(play: "monday_brief" | "margin_risk") {

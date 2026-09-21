@@ -169,10 +169,15 @@ export default async function MondayProfitBriefPage({
             </div>
             {primaryClient ? (
               <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-                <StatCard label="Revenue" value={formatUsd(primaryClient.revenue)} />
+                <StatCard
+                  label="Revenue"
+                  value={formatUsd(primaryClient.revenue)}
+                  evidence={primaryClient.evidence.revenue}
+                />
                 <StatCard
                   label="Labor cost"
                   value={formatUsd(primaryClient.laborCost)}
+                  evidence={primaryClient.evidence.laborCost}
                 />
                 <StatCard
                   label="Gross profit"
@@ -185,11 +190,13 @@ export default async function MondayProfitBriefPage({
                   tone={
                     primaryClient.grossProfit >= 0 ? "positive" : "negative"
                   }
+                  evidence={primaryClient.evidence.grossProfit}
                 />
                 <StatCard
                   label="GP %"
                   value={formatPct(primaryClient.grossMargin)}
                   hint={`Prior ${formatPct(primaryClient.prior.grossMargin)}`}
+                  evidence={primaryClient.evidence.grossMargin}
                 />
               </div>
             ) : (

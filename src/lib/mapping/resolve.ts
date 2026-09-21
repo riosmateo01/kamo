@@ -1,7 +1,5 @@
 import type {
   ClientMap,
-  HarvestClient,
-  HarvestProject,
   MappingService,
   MappingSnapshot,
   ProjectMap,

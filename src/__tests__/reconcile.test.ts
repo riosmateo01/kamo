@@ -6,6 +6,7 @@ import { pnlReconciler } from "@/lib/pnl/reconcile";
 import { collectMismatches } from "@/lib/pnl/assert";
 import mappingFixture from "@/lib/fixtures/mapping.json";
 import expected from "@/lib/fixtures/expected-pnl.json";
+import type { ClientMap, ProjectMap } from "@/lib/contracts/types";
 
 describe("Spike 0 recon", () => {
   it("matches expected-pnl.json within tolerance", async () => {
@@ -39,8 +40,8 @@ describe("Spike 0 recon", () => {
       harvestProjects: projects,
       qboCustomers: customers,
       qboJobs: jobs,
-      clientMaps: mappingFixture.clientMaps as any,
-      projectMaps: mappingFixture.projectMaps as any,
+      clientMaps: mappingFixture.clientMaps as ClientMap[],
+      projectMaps: mappingFixture.projectMaps as ProjectMap[],
     });
 
     const actual = pnlReconciler.reconcile({
@@ -135,6 +136,26 @@ describe("Spike 0 recon", () => {
         (n) => n.entityType === "time" && n.timeEntryId === "te5"
       )
     ).toBe(true);
+
+    const website = actual.projects.find(
+      (p) => p.harvestProjectId === "h_proj_website"
+    );
+    expect(website?.evidence.revenue.value).toBe(website?.revenue);
+    expect(website?.evidence.laborCost.value).toBe(website?.laborCost);
+    expect(website?.evidence.grossProfit.value).toBe(website?.grossProfit);
+    expect(website?.evidence.revenue.records.length).toBeGreaterThan(0);
+    expect(
+      website?.evidence.laborCost.records.some(
+        (record) => record.id === "te5" && record.contribution === null
+      )
+    ).toBe(true);
+    expect(website?.evidence.laborCost.gaps[0]).toContain("no cost rate");
+
+    const acme = actual.clients.find(
+      (client) => client.harvestClientId === "h_client_acme"
+    );
+    expect(acme?.evidence.revenue.value).toBe(acme?.revenue);
+    expect(acme?.evidence.grossMargin.value).toBe(acme?.grossMargin);
 
     void timeEntries; // period-filtered fetch kept for Spike 1 sync shape
   });
