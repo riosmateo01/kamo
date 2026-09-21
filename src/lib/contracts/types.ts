@@ -119,6 +119,7 @@ export interface ProjectPnL extends PeriodPnL {
   harvestProjectId: string;
   qboJobId: string;
   name: string;
+  evidence: import("@/lib/metrics/types").PnlEvidence;
   prior: PeriodPnL & { revenueDelta: number; grossProfitDelta: number };
 }
 
@@ -126,6 +127,7 @@ export interface ClientPnL extends PeriodPnL {
   harvestClientId: string;
   qboCustomerId: string;
   name: string;
+  evidence: import("@/lib/metrics/types").PnlEvidence;
   prior: PeriodPnL & { revenueDelta: number; grossProfitDelta: number };
 }
 

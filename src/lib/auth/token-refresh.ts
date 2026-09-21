@@ -140,7 +140,7 @@ async function persistRefresh(
 export async function ensureFreshAccessToken(
   row: TokenRow
 ): Promise<string> {
-  let access = decryptToken(row.accessTokenCipher);
+  const access = decryptToken(row.accessTokenCipher);
 
   const needsRefresh = isExpiredOrNear(row.expiresAt);
   if (!needsRefresh) return access;

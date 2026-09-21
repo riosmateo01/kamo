@@ -9,7 +9,7 @@ export type AppHeaderProps = {
   subtitle?: ReactNode;
   freshness?: ReactNode;
   source?: BriefSource;
-  current: "brief" | "prompts" | "connections" | "mapping" | "help" | "rfo";
+  current: "brief" | "ask" | "reports" | "prompts" | "connections" | "mapping" | "health" | "help" | "rfo";
 };
 
 const sourceBadge: Record<
@@ -41,7 +41,7 @@ export function AppHeader({
     current === "mapping" ? "connections" : current;
 
   const linkClass = (
-    key: "brief" | "prompts" | "connections" | "help" | "rfo"
+    key: "brief" | "ask" | "reports" | "prompts" | "connections" | "health" | "help" | "rfo"
   ) =>
     key === activeNav
       ? "rounded-md bg-zinc-900 px-2.5 py-1 text-xs font-semibold text-white"
@@ -64,12 +64,20 @@ export function AppHeader({
             </span>
           </Link>
           <nav className="flex flex-wrap items-center gap-1" aria-label="Product">
+            <Link href="/ask" className={linkClass("ask")} aria-current={current === "ask" ? "page" : undefined}>Ask</Link>
             <Link
               href="/brief"
               className={linkClass("brief")}
               aria-current={current === "brief" ? "page" : undefined}
             >
               Brief
+            </Link>
+            <Link
+              href="/reports"
+              className={linkClass("reports")}
+              aria-current={current === "reports" ? "page" : undefined}
+            >
+              Reports
             </Link>
             <Link
               href="/prompts"
@@ -84,6 +92,13 @@ export function AppHeader({
               aria-current={current === "rfo" ? "page" : undefined}
             >
               RFO
+            </Link>
+            <Link
+              href="/data-health"
+              className={linkClass("health")}
+              aria-current={current === "health" ? "page" : undefined}
+            >
+              Data health
             </Link>
             <Link
               href="/settings/connections"

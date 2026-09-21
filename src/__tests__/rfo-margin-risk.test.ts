@@ -7,6 +7,9 @@ import {
   formatObjectMessage,
 } from "@/lib/rfo";
 import type { ReconciledPnL } from "@/lib/contracts/types";
+import type { PnlEvidence } from "@/lib/metrics/types";
+
+const unusedEvidence = {} as PnlEvidence;
 
 function fixturePnL(overrides?: {
   projects?: Partial<ReconciledPnL["projects"][number]>[];
@@ -16,6 +19,7 @@ function fixturePnL(overrides?: {
       harvestProjectId: "p_ok",
       qboJobId: "j_ok",
       name: "Healthy Retainer",
+      evidence: unusedEvidence,
       revenue: 10000,
       laborHours: 40,
       laborCost: 3000,
@@ -37,6 +41,7 @@ function fixturePnL(overrides?: {
       harvestProjectId: "p_thin",
       qboJobId: "j_thin",
       name: "Thin Margin Build",
+      evidence: unusedEvidence,
       revenue: 5000,
       laborHours: 80,
       laborCost: 4500,
@@ -58,6 +63,7 @@ function fixturePnL(overrides?: {
       harvestProjectId: "p_over",
       qboJobId: "j_over",
       name: "Over-serviced Rescue",
+      evidence: unusedEvidence,
       revenue: 2000,
       laborHours: 60,
       laborCost: 4800,
@@ -95,6 +101,7 @@ function fixturePnL(overrides?: {
         harvestClientId: "c_bundle",
         qboCustomerId: "qc",
         name: "Bundle Client",
+        evidence: unusedEvidence,
         revenue: 17000,
         laborHours: 180,
         laborCost: 12300,
@@ -172,6 +179,7 @@ describe("margin-risk play detection", () => {
       harvestProjectId: "p_empty",
       qboJobId: "j_empty",
       name: "Idle",
+      evidence: unusedEvidence,
       revenue: 0,
       laborHours: 0,
       laborCost: 0,
