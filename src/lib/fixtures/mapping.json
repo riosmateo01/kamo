@@ -1,0 +1,13 @@
+{
+  "clientMaps": [
+    { "harvestClientId": "h_client_acme", "qboCustomerId": "qbo_cust_acme", "status": "mapped" }
+  ],
+  "projectMaps": [
+    { "harvestProjectId": "h_proj_website", "qboJobId": "qbo_job_website", "status": "mapped" },
+    { "harvestProjectId": "h_proj_retainer", "qboJobId": "qbo_job_retainer", "status": "mapped" }
+  ],
+  "expectedUnmatched": [
+    { "source": "harvest", "entityType": "client", "id": "h_client_orphan", "reason": "no QBO customer" },
+    { "source": "harvest", "entityType": "project", "id": "h_proj_unmapped", "reason": "client unmapped; no QBO job" }
+  ]
+}

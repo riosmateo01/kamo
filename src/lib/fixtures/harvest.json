@@ -1,0 +1,31 @@
+{
+  "period": {
+    "current": { "start": "2026-09-08", "end": "2026-09-14", "label": "week" },
+    "prior": { "start": "2026-09-01", "end": "2026-09-07", "label": "prior_week" }
+  },
+  "clients": [
+    { "id": "h_client_acme", "name": "Acme Co" },
+    { "id": "h_client_orphan", "name": "Orphan Labs" }
+  ],
+  "projects": [
+    { "id": "h_proj_website", "clientId": "h_client_acme", "name": "Website Redesign", "code": "ACME-WEB" },
+    { "id": "h_proj_retainer", "clientId": "h_client_acme", "name": "Retainer Support", "code": "ACME-RET" },
+    { "id": "h_proj_unmapped", "clientId": "h_client_orphan", "name": "Internal R&D", "code": "ORPH-RND" }
+  ],
+  "people": [
+    { "id": "h_user_1", "name": "Alex Designer", "defaultCostRate": 75 },
+    { "id": "h_user_2", "name": "Sam Engineer", "defaultCostRate": 60 },
+    { "id": "h_user_3", "name": "Jordan Intern", "defaultCostRate": null }
+  ],
+  "timeEntries": [
+    { "id": "te1", "projectId": "h_proj_website", "userId": "h_user_1", "date": "2026-09-09", "hours": 16, "billable": true, "costRate": 75 },
+    { "id": "te2", "projectId": "h_proj_website", "userId": "h_user_2", "date": "2026-09-10", "hours": 24, "billable": true, "costRate": 75 },
+    { "id": "te3", "projectId": "h_proj_retainer", "userId": "h_user_2", "date": "2026-09-11", "hours": 10, "billable": true, "costRate": 60 },
+    { "id": "te4", "projectId": "h_proj_unmapped", "userId": "h_user_1", "date": "2026-09-12", "hours": 5, "billable": false, "costRate": 75 },
+    { "id": "te5", "projectId": "h_proj_website", "userId": "h_user_3", "date": "2026-09-13", "hours": 4, "billable": true, "costRate": null },
+
+    { "id": "te6", "projectId": "h_proj_website", "userId": "h_user_1", "date": "2026-09-02", "hours": 16, "billable": true, "costRate": 75 },
+    { "id": "te7", "projectId": "h_proj_website", "userId": "h_user_2", "date": "2026-09-03", "hours": 16, "billable": true, "costRate": 75 },
+    { "id": "te8", "projectId": "h_proj_retainer", "userId": "h_user_2", "date": "2026-09-04", "hours": 12, "billable": true, "costRate": 60 }
+  ]
+}

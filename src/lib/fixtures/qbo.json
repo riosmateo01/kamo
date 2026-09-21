@@ -1,0 +1,20 @@
+{
+  "period": {
+    "current": { "start": "2026-09-08", "end": "2026-09-14" },
+    "prior": { "start": "2026-09-01", "end": "2026-09-07" }
+  },
+  "customers": [
+    { "id": "qbo_cust_acme", "displayName": "Acme Co" }
+  ],
+  "jobs": [
+    { "id": "qbo_job_website", "customerId": "qbo_cust_acme", "displayName": "Website Redesign", "fullyQualifiedName": "Acme Co:Website Redesign" },
+    { "id": "qbo_job_retainer", "customerId": "qbo_cust_acme", "displayName": "Retainer Support", "fullyQualifiedName": "Acme Co:Retainer Support" }
+  ],
+  "revenueLines": [
+    { "id": "rev1", "jobId": "qbo_job_website", "customerId": "qbo_cust_acme", "date": "2026-09-12", "amount": 8000, "memo": "Website milestone invoice" },
+    { "id": "rev2", "jobId": "qbo_job_retainer", "customerId": "qbo_cust_acme", "date": "2026-09-10", "amount": 2000, "memo": "September retainer" },
+
+    { "id": "rev3", "jobId": "qbo_job_website", "customerId": "qbo_cust_acme", "date": "2026-09-05", "amount": 6000, "memo": "Prior week milestone" },
+    { "id": "rev4", "jobId": "qbo_job_retainer", "customerId": "qbo_cust_acme", "date": "2026-09-03", "amount": 2000, "memo": "Prior retainer slice" }
+  ]
+}

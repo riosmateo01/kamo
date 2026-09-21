@@ -1,0 +1,77 @@
+{
+  "tolerance": { "absoluteUsd": 1, "relativeGpPct": 0.001 },
+  "notes": [
+    "Labor cost = hours × costRate on the entry. Entries with null costRate are EXCLUDED from laborCost but reported in missingCostRateHours.",
+    "Unmapped Harvest projects (h_proj_unmapped) do not appear in reconciled project/client P&L; they appear in needsReview.",
+    "Non-billable flag does not change cost inclusion for Spike 0 — cost still counts when mapped + rate present. Unmapped still excluded from P&L grain."
+  ],
+  "current": {
+    "period": { "start": "2026-09-08", "end": "2026-09-14" },
+    "projects": [
+      {
+        "harvestProjectId": "h_proj_website",
+        "qboJobId": "qbo_job_website",
+        "name": "Website Redesign",
+        "revenue": 8000,
+        "laborHours": 40,
+        "laborCost": 3000,
+        "missingCostRateHours": 4,
+        "grossProfit": 5000,
+        "grossMargin": 0.625,
+        "prior": {
+          "revenue": 6000,
+          "laborCost": 2400,
+          "grossProfit": 3600,
+          "revenueDelta": 2000,
+          "grossProfitDelta": 1400
+        },
+        "calc": "hours: 16+24=40 @75 → 3000; +4h missing rate excluded from cost. rev 8000. GP 5000. margin 5000/8000=0.625"
+      },
+      {
+        "harvestProjectId": "h_proj_retainer",
+        "qboJobId": "qbo_job_retainer",
+        "name": "Retainer Support",
+        "revenue": 2000,
+        "laborHours": 10,
+        "laborCost": 600,
+        "missingCostRateHours": 0,
+        "grossProfit": 1400,
+        "grossMargin": 0.7,
+        "prior": {
+          "revenue": 2000,
+          "laborCost": 720,
+          "grossProfit": 1280,
+          "revenueDelta": 0,
+          "grossProfitDelta": 120
+        },
+        "calc": "10h @60 → 600. rev 2000. GP 1400. margin 0.7. prior 12h@60=720, rev 2000, GP 1280"
+      }
+    ],
+    "clients": [
+      {
+        "harvestClientId": "h_client_acme",
+        "qboCustomerId": "qbo_cust_acme",
+        "name": "Acme Co",
+        "revenue": 10000,
+        "laborHours": 50,
+        "laborCost": 3600,
+        "missingCostRateHours": 4,
+        "grossProfit": 6400,
+        "grossMargin": 0.64,
+        "prior": {
+          "revenue": 8000,
+          "laborCost": 3120,
+          "grossProfit": 4880,
+          "revenueDelta": 2000,
+          "grossProfitDelta": 1520
+        },
+        "calc": "sum of mapped projects: rev 8000+2000, cost 3000+600, hours 40+10, missing 4"
+      }
+    ],
+    "needsReview": [
+      { "entityType": "client", "harvestClientId": "h_client_orphan", "issue": "unmapped" },
+      { "entityType": "project", "harvestProjectId": "h_proj_unmapped", "issue": "unmapped", "laborHoursInPeriod": 5, "laborCostIfMapped": 375 },
+      { "entityType": "time", "timeEntryId": "te5", "issue": "missing_cost_rate", "hours": 4, "projectId": "h_proj_website" }
+    ]
+  }
+}
