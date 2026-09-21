@@ -24,7 +24,7 @@ export function ProjectTable({ projects }: ProjectTableProps) {
   }, [selectedId]);
 
   return (
-    <section className="overflow-hidden rounded-xl border border-zinc-200/80 bg-white shadow-sm">
+    <section id="projects" className="overflow-hidden rounded-xl border border-zinc-200/80 bg-white shadow-sm">
       <header className="flex flex-wrap items-baseline justify-between gap-2 border-b border-zinc-100 bg-zinc-50/60 px-4 py-3">
         <h2 className="text-sm font-semibold text-zinc-900">Projects</h2>
         <span className="text-xs text-zinc-500 tabular-nums">

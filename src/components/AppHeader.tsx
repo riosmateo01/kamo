@@ -9,7 +9,7 @@ export type AppHeaderProps = {
   subtitle?: ReactNode;
   freshness?: ReactNode;
   source?: BriefSource;
-  current: "brief" | "prompts" | "connections" | "mapping" | "health" | "help" | "rfo";
+  current: "brief" | "reports" | "prompts" | "connections" | "mapping" | "health" | "help" | "rfo";
 };
 
 const sourceBadge: Record<
@@ -41,7 +41,7 @@ export function AppHeader({
     current === "mapping" ? "connections" : current;
 
   const linkClass = (
-    key: "brief" | "prompts" | "connections" | "health" | "help" | "rfo"
+    key: "brief" | "reports" | "prompts" | "connections" | "health" | "help" | "rfo"
   ) =>
     key === activeNav
       ? "rounded-md bg-zinc-900 px-2.5 py-1 text-xs font-semibold text-white"
@@ -70,6 +70,13 @@ export function AppHeader({
               aria-current={current === "brief" ? "page" : undefined}
             >
               Brief
+            </Link>
+            <Link
+              href="/reports"
+              className={linkClass("reports")}
+              aria-current={current === "reports" ? "page" : undefined}
+            >
+              Reports
             </Link>
             <Link
               href="/prompts"
