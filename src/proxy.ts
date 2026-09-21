@@ -9,6 +9,7 @@ const isProtected = createRouteMatcher([
   "/rfo(.*)",
   "/settings(.*)",
   "/prompts(.*)",
+  "/data-health(.*)",
   "/api/sync(.*)",
   "/api/rfo(.*)",
   "/api/auth/(harvest|qbo)/start(.*)",
